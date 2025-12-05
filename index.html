@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ PDRO - Quem é fã aplaude, quem odeia se entrega</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #0066ff;
+            --dark-bg: #0a0a0a;
+            --light-text: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.95) !important;
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            color: var(--light-text) !important;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+            opacity: 0.1;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #cccccc;
+        }
+
+        .btn-custom {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Social Links Section */
+        .social-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .social-link-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .social-link-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.4);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .social-link-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .social-link-card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .social-link-card p {
+            color: #cccccc;
+            margin: 0;
+        }
+
+        .social-link-card.instagram:hover {
+            box-shadow: 0 20px 50px rgba(225, 48, 108, 0.4);
+        }
+
+        .social-link-card.spotify:hover {
+            box-shadow: 0 20px 50px rgba(30, 215, 96, 0.4);
+        }
+
+        .social-link-card.soundcloud:hover {
+            box-shadow: 0 20px 50px rgba(255, 85, 0, 0.4);
+        }
+
+        .social-link-card.youtube:hover {
+            box-shadow: 0 20px 50px rgba(255, 0, 0, 0.4);
+        }
+
+        .social-link-card.tiktok:hover {
+            box-shadow: 0 20px 50px rgba(0, 242, 234, 0.4);
+        }
+
+        .social-link-card.facebook:hover {
+            box-shadow: 0 20px 50px rgba(24, 119, 242, 0.4);
+        }
+
+        /* Services */
+        .service-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Music Section */
+        .music-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .music-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .music-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .music-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .music-details h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .music-details p {
+            color: #cccccc;
+            margin: 0;
+        }
+
+        .spotify-player {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Contact */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: #000000;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 2rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-image {
+                width: 100%;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home"><img style="width: 20%;" src="LOGO PDRO.png"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#social">Redes Sociais</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#music">Músicas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>DJ <img style="width: 15%;" src="LOGO PDRO.png"></h1>
+            <p>Transformando sombra em sinfonia</p>
+            <a href="#contact" class="btn-custom">Entre em Contato</a>
+        </div>
+    </section>
+
+    <!-- Social Links Section -->
+    <section id="social">
+        <div class="container">
+            <h2 class="section-title">Conecte-se Comigo</h2>
+            <p style="text-align: center; color: #cccccc; font-size: 1.2rem; margin-bottom: 3rem;">
+                Siga-me nas redes sociais e ouça minhas músicas nas principais plataformas
+            </p>
+            
+            <div class="social-links-grid">
+
+                <a href="https://open.spotify.com/artist/3LPUgumLjNmGtw3Y1emCXo" target="_blank" class="social-link-card spotify">
+                    <div class="social-link-icon">
+                        <i class="fab fa-spotify"></i>
+                    </div>
+                    <h4>Spotify</h4>
+                    <p>Ouça minhas playlists</p>
+                </a>
+
+                <a href="https://soundcloud.com/pdrodavi" target="_blank" class="social-link-card soundcloud">
+                    <div class="social-link-icon">
+                        <i class="fab fa-soundcloud"></i>
+                    </div>
+                    <h4>SoundCloud</h4>
+                    <p>Sets exclusivos</p>
+                </a>
+
+                <a href="https://instagram.com/pdrodavi" target="_blank" class="social-link-card instagram">
+                    <div class="social-link-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h4>Instagram</h4>
+                    <p>@pdrodavi</p>
+                </a>
+
+                <!--
+                <a href="https://youtube.com/@djpdro" target="_blank" class="social-link-card youtube">
+                    <div class="social-link-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <h4>YouTube</h4>
+                    <p>Vídeos e live sets</p>
+                </a>
+
+                <a href="https://tiktok.com/@djpdro" target="_blank" class="social-link-card tiktok">
+                    <div class="social-link-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <h4>TikTok</h4>
+                    <p>Conteúdo diário</p>
+                </a>
+
+                <a href="https://facebook.com/djpdro" target="_blank" class="social-link-card facebook">
+                    <div class="social-link-icon">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <h4>Facebook</h4>
+                    <p>Eventos e novidades</p>
+                </a>
+                -->
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Music Section -->
+    <section id="music" style="background: rgba(255, 255, 255, 0.02);">
+        <div class="container">
+            <h2 class="section-title">Minhas Músicas</h2>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="music-card">
+                        <div class="music-info">
+                            <div class="music-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="music-details">
+                                <h4>Evolução</h4>
+                                <p>Álbum • 2025-2026</p>
+                            </div>
+                        </div>
+                        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7m9kpE2l42TwJDPlqnCxx6?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="music-card">
+                        <div class="music-info">
+                            <div class="music-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="music-details">
+                                <h4>Brilho Novo</h4>
+                                <p>Playlist • 2025-2026</p>
+                            </div>
+                        </div>
+                        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2TvjRZt2iFKhXkLHOVQgYG?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="music-card">
+                        <div class="music-info">
+                            <div class="music-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="music-details">
+                                <h4>Fogo Cruzado</h4>
+                                <p>Playlist • 2025-2026</p>
+                            </div>
+                        </div>
+                        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2WRoXZ1vQY91opJ0nx2vxB?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <!--
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <form class="contact-form">
+                <input type="text" class="form-control" placeholder="Seu Nome" required>
+                <input type="email" class="form-control" placeholder="Seu Email" required>
+                <input type="tel" class="form-control" placeholder="Seu Telefone" required>
+                <textarea class="form-control" rows="5" placeholder="Mensagem" required></textarea>
+                <button type="submit" class="btn-custom w-100">Enviar Mensagem</button>
+            </form>
+        </div>
+    </section>-->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links mb-3">
+                <a href="https://open.spotify.com/artist/3LPUgumLjNmGtw3Y1emCXo"><i class="fab fa-spotify"></i></a>
+                <a href="https://soundcloud.com/pdrodavi"><i class="fab fa-soundcloud"></i></a>
+                <a href="https://instagram.com/pdrodavi"><i class="fab fa-instagram"></i></a>
+                <!--<a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>-->
+                
+            </div>
+            <p>&copy; 2024 DJ PDRO. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 1)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
